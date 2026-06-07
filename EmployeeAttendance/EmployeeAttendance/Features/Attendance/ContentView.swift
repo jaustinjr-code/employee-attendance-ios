@@ -22,18 +22,15 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             TabView(selection: $selectedTab) {
-                //                Tab(Tabs.attendance.rawValue, systemImage: "person.circle", value: .attendance) {
                 MainView()
                     .tabItem {
                         Label(Tabs.attendance.rawValue, systemImage: "person.circle")
                     }
-                //                }
-                //                Tab(Tabs.dashboard.rawValue, systemImage: "person.circle", value: .dashboard) {
+
                 DashboardView()
                     .tabItem {
                         Label(Tabs.dashboard.rawValue, systemImage: "person.circle")
                     }
-                //                }
             }
             .navigationTitle(selectedTab.rawValue)
             .navigationBarTitleDisplayMode(NavigationBarItem.TitleDisplayMode.inline)
@@ -54,7 +51,22 @@ struct ContentView: View {
 
     struct MainView: View {
         var body: some View {
-                Text("Hello, World!")
+            VStack(alignment: .center) {
+                let d = Date()
+                let formatter = DateFormatter()
+                let dateString = formatter.string(from: d)
+                Text(dateString).font(Font.subheadline)
+                Text("Good morning Superstar!").font(Font.largeTitle.bold())
+            
+                Text("Current Time")
+                TimelineView(.periodic(from: .now, by: 1)) { context in
+                        Text(context.date.formatted(.dateTime.hour().minute().second()))
+                }
+                Button(action: {})
+                {
+                    Label("Mark Attendance", systemImage: "play")
+                }
+            }
         }
     }
     
