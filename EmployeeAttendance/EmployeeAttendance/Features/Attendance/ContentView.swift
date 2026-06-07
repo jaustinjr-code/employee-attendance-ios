@@ -61,33 +61,31 @@ struct ContentView: View {
                     alignment: .topLeading
                 )
                 .padding(20)
+
                 let d = Date()
                 let formatter = DateFormatter()
                 let dateString = formatter.string(from: d)
                 Text(dateString).font(Font.subheadline)
                 
-                Section {
-                    VStack(alignment: .center) {
-                        Text("Current Time")
-                        TimelineView(.periodic(from: .now, by: 1)) { context in
-                            Text(context.date.formatted(.dateTime.hour().minute().second()))
-                        }.font(Font.title)
-                        Button(action: {})
-                        {
-                            Label("Mark Attendance", systemImage: "play")
-                        }
+                VStack(alignment: .center) {
+                    Text("Current Time")
+                    TimelineView(.periodic(from: .now, by: 1)) { context in
+                        Text(context.date.formatted(.dateTime.hour().minute().second()))
+                    }.font(Font.title)
+                    Button(action: {})
+                    {
+                        Label("Mark Attendance", systemImage: "play")
                     }
-                    .frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity,
-                        alignment: .center
-                    )
-                    .background(Color.red)
-                    .padding(10)
                 }
-                .background(Color.blue)
+                .padding(50)
+                .background(Color.red)
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .top
+                )
             }
         }
     }
