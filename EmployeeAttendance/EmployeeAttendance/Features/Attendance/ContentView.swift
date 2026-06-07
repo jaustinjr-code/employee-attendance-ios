@@ -52,20 +52,42 @@ struct ContentView: View {
     struct MainView: View {
         var body: some View {
             VStack(alignment: .center) {
+                VStack(alignment: .leading) {
+                    Text("Good morning Superstar!").font(Font.largeTitle.bold())
+                }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    alignment: .topLeading
+                )
+                .padding(20)
                 let d = Date()
                 let formatter = DateFormatter()
                 let dateString = formatter.string(from: d)
                 Text(dateString).font(Font.subheadline)
-                Text("Good morning Superstar!").font(Font.largeTitle.bold())
-            
-                Text("Current Time")
-                TimelineView(.periodic(from: .now, by: 1)) { context in
-                        Text(context.date.formatted(.dateTime.hour().minute().second()))
+                
+                Section {
+                    VStack(alignment: .center) {
+                        Text("Current Time")
+                        TimelineView(.periodic(from: .now, by: 1)) { context in
+                            Text(context.date.formatted(.dateTime.hour().minute().second()))
+                        }.font(Font.title)
+                        Button(action: {})
+                        {
+                            Label("Mark Attendance", systemImage: "play")
+                        }
+                    }
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        minHeight: 0,
+                        maxHeight: .infinity,
+                        alignment: .center
+                    )
+                    .background(Color.red)
+                    .padding(10)
                 }
-                Button(action: {})
-                {
-                    Label("Mark Attendance", systemImage: "play")
-                }
+                .background(Color.blue)
             }
         }
     }
