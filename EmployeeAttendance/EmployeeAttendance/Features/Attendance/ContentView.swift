@@ -50,9 +50,16 @@ struct ContentView: View {
     }
 
     struct MainView: View {
+        @State private var isClockedIn: Bool = false
+        
         var body: some View {
+            let d = Date()
+            let formatter = DateFormatter()
+            let dateString = formatter.string(from: d)
+            
             VStack(alignment: .center) {
                 VStack(alignment: .leading) {
+                    Text(dateString).font(Font.subheadline).background(Color.red)
                     Text("Good morning Superstar!").font(Font.largeTitle.bold())
                 }
                 .frame(
@@ -61,24 +68,24 @@ struct ContentView: View {
                     alignment: .topLeading
                 )
                 .padding(20)
-
-                let d = Date()
-                let formatter = DateFormatter()
-                let dateString = formatter.string(from: d)
-                Text(dateString).font(Font.subheadline)
                 
                 VStack(alignment: .center) {
                     Text("Current Time")
                     TimelineView(.periodic(from: .now, by: 1)) { context in
                         Text(context.date.formatted(.dateTime.hour().minute().second()))
                     }.font(Font.title)
-                    Button(action: {})
+                    
+                    Button(action: {isClockedIn = !isClockedIn})
                     {
-                        Label("Mark Attendance", systemImage: "play")
+                        Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
                     }
+                    .background(Color.red)
+                    
+                    Text(isClockedIn ? "Clocked in at \(dateString)" : "Clocked out at \(dateString)")
                 }
                 .padding(50)
-                .background(Color.red)
+                .background(Color.accentColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .frame(
                     minWidth: 0,
                     maxWidth: .infinity,
