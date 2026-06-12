@@ -29,7 +29,7 @@ struct ContentView: View {
 
                 DashboardView()
                     .tabItem {
-                        Label(Tabs.dashboard.rawValue, systemImage: "person.circle")
+                        Label(Tabs.dashboard.rawValue, systemImage: "list.bullet")
                     }
             }
             .navigationTitle(selectedTab.rawValue)
