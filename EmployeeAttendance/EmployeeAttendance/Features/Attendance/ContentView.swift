@@ -76,7 +76,7 @@ struct ContentView: View {
             
             VStack(alignment: .center) {
                 VStack(alignment: .leading) {
-                    Text(dateString).font(Font.subheadline).background(Color.red)
+                    Text(dateString).font(Font.subheadline)
                     Text("Good morning Superstar!").font(Font.largeTitle.bold())
                 }
                 .frame(
@@ -99,7 +99,7 @@ struct ContentView: View {
                     {
                         Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
                     }
-                    .background(Color.red)
+                    .buttonStyle(PlainButtonStyle())
                     
                     if !clockTime.isEmpty {
                         Text(isClockedIn ? "Clocked in at \(clockTime)" : "Clocked out at \(clockTime)")
@@ -112,7 +112,8 @@ struct ContentView: View {
                 
                 Button(action: {}) {
                     Label("Enable Location", systemImage: "location.fill")
-                }.background(Color.red)
+                }
+                .buttonStyle(.glass)
             }
             .frame(
                 minWidth: 0,
