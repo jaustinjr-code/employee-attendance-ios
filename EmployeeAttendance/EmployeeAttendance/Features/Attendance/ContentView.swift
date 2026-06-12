@@ -24,7 +24,7 @@ struct ContentView: View {
             TabView(selection: $selectedTab) {
                 MainView()
                     .tabItem {
-                        Label(Tabs.attendance.rawValue, systemImage: "person.circle")
+                        Label(Tabs.attendance.rawValue, systemImage: "checkmark.circle")
                     }
 
                 DashboardView()
