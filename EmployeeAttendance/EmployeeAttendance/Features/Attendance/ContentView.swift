@@ -51,11 +51,28 @@ struct ContentView: View {
 
     struct MainView: View {
         @State private var isClockedIn: Bool = false
+        @State private var clockTime: String = ""
+        
+        func formattedCurrentDate() -> String {
+            Date.now.formatted(
+                .dateTime
+                    .weekday(.wide)
+                    .month(.abbreviated)
+                    .day()
+            )
+        }
+        
+        func formattedCurrentTime() -> String {
+            Date.now.formatted(
+                .dateTime
+                    .hour()
+                    .minute()
+                    .second()
+            )
+        }
         
         var body: some View {
-            let d = Date()
-            let formatter = DateFormatter()
-            let dateString = formatter.string(from: d)
+            let dateString = formattedCurrentDate()
             
             VStack(alignment: .center) {
                 VStack(alignment: .leading) {
@@ -75,13 +92,18 @@ struct ContentView: View {
                         Text(context.date.formatted(.dateTime.hour().minute().second()))
                     }.font(Font.title)
                     
-                    Button(action: {isClockedIn = !isClockedIn})
+                    Button(action: {
+                        isClockedIn = !isClockedIn
+                        clockTime = formattedCurrentTime()
+                    })
                     {
                         Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
                     }
                     .background(Color.red)
                     
-                    Text(isClockedIn ? "Clocked in at \(dateString)" : "Clocked out at \(dateString)")
+                    if !clockTime.isEmpty {
+                        Text(isClockedIn ? "Clocked in at \(clockTime)" : "Clocked out at \(clockTime)")
+                    }
                 }
                 .padding(50)
                 .background(Color.accentColor)
