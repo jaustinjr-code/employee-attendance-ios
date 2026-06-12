@@ -108,14 +108,19 @@ struct ContentView: View {
                 .padding(50)
                 .background(Color.accentColor)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: .infinity,
-                    alignment: .top
-                )
+                .padding(20)
+                
+                Button(action: {}) {
+                    Label("Enable Location", systemImage: "location.fill")
+                }.background(Color.red)
             }
+            .frame(
+                minWidth: 0,
+                maxWidth: .infinity,
+                minHeight: 0,
+                maxHeight: .infinity,
+                alignment: .top
+            )
         }
     }
     
