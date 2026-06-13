@@ -6,10 +6,8 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
     @State private var selectedTab: Tabs = .attendance
     
     enum Tabs: String, Equatable, Hashable, Identifiable {
