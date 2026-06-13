@@ -72,54 +72,56 @@ struct ContentView: View {
         var body: some View {
             let dateString = formattedCurrentDate()
             
-            VStack(alignment: .center) {
-                VStack(alignment: .leading) {
-                    Text(dateString).font(Font.subheadline)
-                    Text("Good morning Superstar!").font(Font.largeTitle.bold())
+            ScrollView{
+                VStack(alignment: .center) {
+                    VStack(alignment: .leading) {
+                        Text(dateString).font(Font.subheadline)
+                        Text("Good morning Superstar!").font(Font.largeTitle.bold())
+                    }
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        alignment: .topLeading
+                    )
+                    .padding(20)
+                    
+                    VStack(alignment: .center) {
+                        Text("Current Time")
+                        TimelineView(.periodic(from: .now, by: 1)) { context in
+                            Text(context.date.formatted(.dateTime.hour().minute().second()))
+                        }.font(Font.title)
+                        
+                        Button(action: {
+                            isClockedIn = !isClockedIn
+                            clockTime = formattedCurrentTime()
+                        })
+                        {
+                            Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        if !clockTime.isEmpty {
+                            Text(isClockedIn ? "Clocked in at \(clockTime)" : "Clocked out at \(clockTime)")
+                        }
+                    }
+                    .padding(50)
+                    .background(Color.accentColor)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .padding(20)
+                    
+                    Button(action: {}) {
+                        Label("Enable Location", systemImage: "location.fill")
+                    }
+                    .buttonStyle(.glass)
                 }
                 .frame(
                     minWidth: 0,
                     maxWidth: .infinity,
-                    alignment: .topLeading
+                    minHeight: 0,
+                    maxHeight: .infinity,
+                    alignment: .top
                 )
-                .padding(20)
-                
-                VStack(alignment: .center) {
-                    Text("Current Time")
-                    TimelineView(.periodic(from: .now, by: 1)) { context in
-                        Text(context.date.formatted(.dateTime.hour().minute().second()))
-                    }.font(Font.title)
-                    
-                    Button(action: {
-                        isClockedIn = !isClockedIn
-                        clockTime = formattedCurrentTime()
-                    })
-                    {
-                        Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    if !clockTime.isEmpty {
-                        Text(isClockedIn ? "Clocked in at \(clockTime)" : "Clocked out at \(clockTime)")
-                    }
-                }
-                .padding(50)
-                .background(Color.accentColor)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(20)
-                
-                Button(action: {}) {
-                    Label("Enable Location", systemImage: "location.fill")
-                }
-                .buttonStyle(.glass)
             }
-            .frame(
-                minWidth: 0,
-                maxWidth: .infinity,
-                minHeight: 0,
-                maxHeight: .infinity,
-                alignment: .top
-            )
         }
     }
     
