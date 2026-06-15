@@ -96,7 +96,7 @@ struct ContentView: View {
                             clockTime = formattedCurrentTime()
                         })
                         {
-                            Label(isClockedIn ? "Clock out" : "Clock in", systemImage: "play")
+                            Label(isClockedIn ? "Clock out" : "Clock in", systemImage: isClockedIn ? "stop.fill" : "play.fill")
                         }
                         .buttonStyle(PlainButtonStyle())
                         
