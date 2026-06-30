@@ -25,7 +25,7 @@ struct EmployeeAttendanceApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AttendanceScreen()
         }
     }
 }

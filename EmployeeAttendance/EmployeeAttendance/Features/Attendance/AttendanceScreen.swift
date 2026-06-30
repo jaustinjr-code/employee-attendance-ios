@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct AttendanceScreen: View {
     @State private var selectedTab: Tabs = .attendance
     
     enum Tabs: String, Equatable, Hashable, Identifiable {
@@ -133,5 +133,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    AttendanceScreen()
 }
