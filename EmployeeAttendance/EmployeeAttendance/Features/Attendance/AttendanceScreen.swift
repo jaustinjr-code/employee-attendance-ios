@@ -51,6 +51,8 @@ struct AttendanceScreen: View {
         @State private var isClockedIn: Bool = false
         @State private var clockTime: String = ""
         
+        @State private var showLocationPermissionSheet: Bool = false
+        
         func formattedCurrentDate() -> String {
             Date.now.formatted(
                 .dateTime
@@ -109,7 +111,9 @@ struct AttendanceScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .padding(20)
                     
-                    Button(action: {}) {
+                    Button(action: {
+                        
+                    }) {
                         Label("Enable Location", systemImage: "location.fill")
                     }
                     .buttonStyle(.glass)
@@ -121,6 +125,11 @@ struct AttendanceScreen: View {
                     maxHeight: .infinity,
                     alignment: .top
                 )
+            }
+            .sheet(isPresented: $showLocationPermissionSheet) {
+                LocationPermissionSheet(onAllow: {
+                    locationManager.requestPermission()
+                })
             }
         }
     }
