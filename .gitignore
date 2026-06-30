@@ -1,6 +1,6 @@
 .DS_Store
 *.pbxproj
-/*.xcodeproj
+EmployeeAttendance/EmployeeAttendance.xcodeproj
 
 # Xcode
 #
