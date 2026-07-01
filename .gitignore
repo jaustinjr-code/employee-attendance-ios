@@ -1,9 +1,5 @@
 .DS_Store
-<<<<<<< HEAD
-*.pbxproj
-EmployeeAttendance/EmployeeAttendance.xcodeproj
-=======
->>>>>>> main
+EmployeeAttendance/EmployeeAttendance.xcodeproj/
 
 # Xcode
 #
@@ -67,4 +63,3 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
-EmployeeAttendance/EmployeeAttendance.xcodeproj/
