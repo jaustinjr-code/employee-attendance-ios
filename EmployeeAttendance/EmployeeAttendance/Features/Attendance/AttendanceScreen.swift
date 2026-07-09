@@ -54,7 +54,7 @@ struct AttendanceScreen: View {
         
         @State private var showLocationPermissionSheet: Bool = false
         
-        private let locationManager = LocationManager()
+        @State private var locationManager = LocationManager()
         
         func formattedCurrentDate() -> String {
             Date.now.formatted(
@@ -115,13 +115,14 @@ struct AttendanceScreen: View {
                     .padding(20)
                     
                     Button(action: {
-                        
+                        locationManager.requestAuthorization()
                     }) {
                         Label("Enable Location", systemImage: "location.fill")
-                        Text(locationManager.lastKnownLocation?.latitude.description ?? "Unknown")
-                        Text(locationManager.lastKnownLocation?.longitude.description ?? "Unknown")
                     }
                     .buttonStyle(.glass)
+                    
+                    Text(locationManager.lastKnownLocation?.latitude.description ?? "Unknown")
+                    Text(locationManager.lastKnownLocation?.longitude.description ?? "Unknown")
                 }
                 .frame(
                     minWidth: 0,

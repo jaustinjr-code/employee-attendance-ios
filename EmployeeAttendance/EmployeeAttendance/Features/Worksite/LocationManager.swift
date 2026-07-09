@@ -13,7 +13,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     var lastKnownLocation: CLLocationCoordinate2D?
     
-    // Reference: https://gist.github.com/robertmryan/e70aef8595fd79ad30f773c876d155a5
+    override init() {
+        super.init()
+        manager.delegate = self // registers the CLLocationManagerDelegate
+        manager.desiredAccuracy = kCLLocationAccuracyBest // approximates first before settling
+    }
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         let status = manager.authorizationStatus
         if status == .authorizedAlways || status == .authorizedWhenInUse {
@@ -23,5 +28,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastKnownLocation = locations.last?.coordinate
+    }
+    
+    func requestAuthorization() {
+        manager.requestAlwaysAuthorization()
     }
 }
