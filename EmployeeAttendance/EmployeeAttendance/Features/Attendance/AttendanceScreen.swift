@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct AttendanceScreen: View {
     @State private var selectedTab: Tabs = .attendance
@@ -52,6 +53,8 @@ struct AttendanceScreen: View {
         @State private var clockTime: String = ""
         
         @State private var showLocationPermissionSheet: Bool = false
+        
+        private let locationManager = LocationManager()
         
         func formattedCurrentDate() -> String {
             Date.now.formatted(
@@ -115,6 +118,8 @@ struct AttendanceScreen: View {
                         
                     }) {
                         Label("Enable Location", systemImage: "location.fill")
+                        Text(locationManager.lastKnownLocation?.latitude.description ?? "Unknown")
+                        Text(locationManager.lastKnownLocation?.longitude.description ?? "Unknown")
                     }
                     .buttonStyle(.glass)
                 }
@@ -125,11 +130,6 @@ struct AttendanceScreen: View {
                     maxHeight: .infinity,
                     alignment: .top
                 )
-            }
-            .sheet(isPresented: $showLocationPermissionSheet) {
-                LocationPermissionSheet(onAllow: {
-                    locationManager.requestPermission()
-                })
             }
         }
     }
